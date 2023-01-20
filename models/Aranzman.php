@@ -20,9 +20,11 @@ class Aranzman{
         $this->datum=$datum;
     }
 
+ 
+
     public static function pretraziAranzmane($zaposleni, $sortiranje, mysqli $konekcija)
     {
-        $sql = "SELECT * FROM aranzman a join zaposleni z on a.zaposleniID = z.zaposleniID join klijent k on a.klijentID = k.klijentID join cvece c on a.tipID = c.tipID";
+        $sql = "SELECT * FROM aranzman a join zaposleni z on a.zaposleniID = z.zaposleniID join klijent k on a.klijentID = k.klijentID join cvece c on a.cveceID = c.cveceID";
         if($zaposleni != "1"){
             $sql .= " WHERE a.zaposleniID = " . $zaposleni;
         }

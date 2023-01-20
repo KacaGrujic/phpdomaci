@@ -3,6 +3,7 @@
 require "dbBroker.php";
 require "models/Aranzman.php";
 require "models/Zaposleni.php";
+require "models/Klijent.php";
 
 session_start();
 if (!isset($_SESSION['user_id'])) {
@@ -15,13 +16,13 @@ $poruka = "";
 if(isset($_POST['dodaj'])){
     $zaposleni = trim($_POST['zaposleni']);
     $klijent = trim($_POST['klijent']);
-    $tip = trim($_POST['tip']);
+    $cvece = trim($_POST['cvece']);
     $kolicina = trim($_POST['kolicina']);
     $datum = trim($_POST['datum']);
     $datumF = date("Y-m-d", strtotime($datum));
 
 
-    if(Aranzman::dodajAranzman($zaposleni, $klijent, $tip, $kolicina, $datumF, $konekcija)){
+    if(Aranzman::dodajAranzman($zaposleni, $klijent, $cvece, $kolicina, $datumF, $konekcija)){
         header("Location: home.php");
     }else{
         $poruka = "Aranzman nije sačuvan";
@@ -76,7 +77,7 @@ if(isset($_POST['dodaj'])){
                     <br>
                     <button class="BtnForm" type="submit" name="dodaj" >Dodaj</button>
                     <br><br>
-                    <a href="pocetna.php", class="BtnForm">Nazad</a>
+                    <a href="home.php", class="BtnForm">Nazad</a>
 
                 </form>
             </div>
@@ -93,7 +94,38 @@ if(isset($_POST['dodaj'])){
     <script src="js/main.js"></script>
 
     <script>
-   
+        function popuniZaposlene() {
+
+            $.ajax({
+                url: 'popuniZaposlene.php',
+                success: function (data) {
+                   $("#zaposleni").html(data);
+                }
+            });
+        }
+        popuniZaposlene();
+ 
+        function popuniKlijente() {
+
+            $.ajax({
+                url: 'popuniKlijente.php',
+                success: function (data) {
+                $("#klijent").html(data);
+                }
+            });
+        }
+        popuniKlijente();
+
+        function popuniCvece() {
+
+        $.ajax({
+            url: 'popuniCvece.php',
+            success: function (data) {
+            $("#cvece").html(data);
+            }
+        });
+        }
+        popuniCvece();
 
 
     </script>
