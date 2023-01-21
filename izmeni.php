@@ -14,8 +14,9 @@ if(isset($_POST['izmeni'])){
     $aranzman = trim($_POST['aranzman']);
     $datum = trim($_POST['datum']);
     $datumF = date("Y-m-d", strtotime($datum));
-
-    if(Aranzman::izmeniAranzman($aranzman, $datumF, $konekcija)){
+    $cvece = trim($_POST['cvece']);
+    $kolicina = trim($_POST['kolicina']);
+    if(Aranzman::izmeniAranzman($aranzman, $datumF, $kolicina, $cvece, $konekcija)){
         header("Location: home.php");
     }else{
         $poruka = "Aranzman nije izmenjen";
@@ -54,7 +55,15 @@ if(isset($_POST['izmeni'])){
                 <form method="post" action="">
                     <label for="aranzman">Aranzman</label>
                     <select id="aranzman" name="aranzman" class="form-control">
-
+                        <br><br>
+                    <label for="cvece">Cvece</label>
+                    <select id="cvece" name="cvece" class="form-control">
+                    </select>
+                    <label for="kolicina">Kolicina</label>
+                    <label for="cvece">Cvece</label>
+                    <select id="cvece" name="cvece" class="form-control">
+                    </select>
+                    <input type="int" id="kolicina" name="kolicina" class="form-control">
                     </select>
                     <label for="datum">Datum</label>
                     <input type="date" name="datum" class="form-control">
@@ -85,6 +94,21 @@ if(isset($_POST['izmeni'])){
             });
         }
         popuniAranzmane();
+  
+      
+
+        function popuniCvece() {
+
+        $.ajax({
+            url: 'popuniCvece.php',
+            success: function (data) {
+            $("#cvece").html(data);
+            }
+        });
+        }
+        popuniCvece();
+
+
 
     </script>
 </body>

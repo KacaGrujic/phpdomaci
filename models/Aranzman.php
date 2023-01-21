@@ -39,14 +39,14 @@ class Aranzman{
         return $rezultati;
     }
 
-    public static function dodajAranzman($zaposleniID, $klijentID, $tipID, $kolicina, $datum, mysqli $konekcija)
+    public static function dodajAranzman($zaposleniID, $klijentID, $cveceID, $kolicina, $datum, mysqli $konekcija)
     {
-        return $konekcija->query("INSERT INTO aranzman VALUES(null, '$zaposleniID' , '$klijentID', '$tipID' , '$kolicina', '$datum' )");  
+        return $konekcija->query("INSERT INTO aranzman VALUES(null, '$zaposleniID' , '$klijentID', '$cveceID' , '$kolicina', '$datum' )");  
     }
 
-    public static function izmeniAranzman($aranzmanID, $datum, mysqli $konekcija)
+    public static function izmeniAranzman($aranzmanID, $datum, $kolicina, $cveceID, mysqli $konekcija)
     {
-        return $konekcija->query("UPDATE aranzman SET datum = '$datum' WHERE aranzmanID = $aranzmanID");
+        return $konekcija->query("UPDATE aranzman SET datum = '$datum', kolicina = '$kolicina', cveceID = '$cveceID' WHERE aranzmanID = $aranzmanID");
     }
 
     public static function obrisiAranzman($aranzmanID, mysqli $konekcija)
